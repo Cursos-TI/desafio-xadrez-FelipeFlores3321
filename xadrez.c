@@ -1,155 +1,173 @@
+//O xadrez terminado, refiz o código do zero, diferente do nível iniciante e do médio.
+//Achei mais fácil, e ficaria menos confuso de mexer. Então o código é outro, comparado ao nível médio e iniciante!
+
 #include <stdio.h>
 
+//Estrutura recursiva para mover a Torre
+void MovaTorre(int casas){
 
-int main() {
-
-
-    int bispo = 0,torre = 0,rainha =0;
-    //Variável das peças
-
-    int bispoDia = 1 ,bispoLat = 1;
-    // Para movimentação do Bispo, lateral e diagonal!
-
-    int torreMov = 1;
-    //Para movimentação da torre
-
-    int rainhaMov = 1;
-
-    int escolhaMenu;
-    //Para escolher o Menu
-
+    if(casas > 0){
     
-    //O menu usando do-while, para não deixar o usuario escolher errado!
-    do{
+        printf("Direita \n \n");
+        MovaTorre(casas - 1);
 
-    printf("Bem-vindo ao menu! \n");
-    printf("Escolha a peça para mover: \n");
-    printf("1. Bispo \n");
-    printf("2. Torre \n");
-    printf("3. Rainha \n");
-    printf("4. Sair \n");
-    scanf("%i", &escolhaMenu);
+    }
+    
+}
+
+
+//Estrutura para mover o Bispo
+void MovaBispo(int casas){
+
+int MoviBispo;
+
+if (casas > 0)
+{
+    int moverBispo;
+
+    moverBispo = casas;
+
+   for(casas; casas > 0; casas--){
+
+    printf("Cima \n");
+
+    for(moverBispo; moverBispo >= casas; moverBispo--){
+        printf("Direita \n \n"); 
+    }
+
+   }
+}
+
+}
+
+
+//Estrutura para mover a Rainha
+void MovaRainha(int casas){
+    if(casas > 0){
+        printf("Esquerda \n \n");
+
+        MovaRainha(casas - 1);
+    }
+}
+
+
+
+//Estrutura para mover o Cavalo
+void MovaCavalo(int casas){
+
+    if(casas >0){
+
+        int moverCavalo = casas;
+        int moverCavalo2 = moverCavalo;
+
+        for(casas; casas > 0; casas--){
+            printf("Cima \n");
+            for(moverCavalo; moverCavalo >= casas; moverCavalo--){
+                printf("Cima \n");
+                    for(moverCavalo2; moverCavalo2 >= moverCavalo; moverCavalo2--){
+                        printf("Direita \n \n");
+                    }
+            } 
+        }
+
+    }
+}
+
+
+//Aqui começamos a chamar as estruturas recursivas para o main
+
+int main(){
+
+int torreQuant, bispoQuant, rainhaQuant,cavaloQuant;
+//Fiz essas variáveis para o jogador poder escolher quantas vezes quer mexer as peças. 
+//Apenas para dar um poder de escolha maior, e poder estudar mais de estruturas de repetição.
+
+int EscolhaMenu;
+//Para o menu
+
+
+do{
+
+//Usei o do-while, para impedir o usuario de escolher o valor errado para a varíavel
+printf("Escolha a peça para mover! \n");
+printf("1. Torre \n");
+printf("2. Bispo \n");
+printf("3. Rainha \n");
+printf("4. Cavalo \n");
+scanf("%i", &EscolhaMenu);
+
+}while(EscolhaMenu <= 0 || EscolhaMenu > 4);
+
+//Menu switch para escolher as peças
+switch (EscolhaMenu)
+{
+case 1:
+
+do{
+//Do-while novamente para impedir escolhas de valor erradas
+    printf("A torre pode ser mover 5 blocos para direita! \n");
+    printf("Escolha quantas vezes ela irá se mover! \n");
+    
+    scanf("%i", &torreQuant);
+    //Usei a variavel de mais cedo aqui.
+    
+    } while(torreQuant <= 0 || torreQuant > 5);
+    //Usuario escolheu a varíavel certa, o código imprime tudo certo.
+
+    MovaTorre(torreQuant);
+
+    break;
+
+case 2:
+
+//Mesma lógica.
+
+do{
+
+    printf("O bispo pode se mover 1 para direita e 1 para cima 5 vezes! \n");
+    printf("Escolha quantas vezes ele irá se mover! \n");
+
+    scanf("%i", &bispoQuant);
    
-    } while(escolhaMenu <= 0 || escolhaMenu > 4);
 
-
-    //Aqui acontece depois do Do-While ser escolhido corretamente, menu switch básico!
-    switch (escolhaMenu)
-    {
-    case 1:
+    }while(bispoQuant <= 0 || bispoQuant > 5);
     
-        //Caso o usuario escolha o Bispo, iremos pegar quantas vezes querem que ele se mova!
-         //Usei o do-while, para garantir que usuario escolha dentro dos limites estabelecidos!
-        do{
+    MovaBispo(bispoQuant);
 
-        printf("Você escolheu o bispo! \n");
-        printf("Bispo se move na diagonal e até 5 casas! \n");
-        printf("Escolha quantas vezes o bispo deve se mover: \n");
-        scanf("%i", &bispo);
+    break;
 
-        }while(bispo <= 0 || bispo > 5);
+case 3:
 
+//Mesma lógica.
 
-        while (bispoDia <= bispo && bispoLat <= bispo)
-        {
-            
-        printf("Cima \n");
-        printf("Direita \n");
-        printf("O bispo se moveu %i para direita e %i para cima! \n \n", bispoLat, bispoDia);
-        bispoLat++;
-        bispoDia++;
+do{
+
+    printf("A rainha pode ser mover 8 blocos para esquerda! \n");
+    printf("Escolha quantas vezes ela irá se mover! \n");
     
-        }
-        //While, para fazer a movimentação!
-        //Enquanto as variaveis de movimentações, forem menor que a variavel bispo, o  bispo irá se mover!
-      
-
-        break;
-
-    case 2:
-
-        //Menu de escolha da torre!          
-        //Mesma lógica dos outros, enquanto não estiver nos parametros certo, a torre não irá se mover
-        do{
-
-        printf("Você escolheu a torre! \n");
-        printf("A torre se move para direita, e até 5 vezes! \n");
-        printf("Quantas vezes irá se mover? \n");
-        scanf("%i", &torre);
-
-        }while(torre <= 0 || torre > 5);
-        
-        //Enquanto torreMov não for igual a torre, vai continuar se movimentando!
-        while (torreMov <= torre)
-        {
-            printf("Direita \n \n");
-            torreMov++;
-        }
-        
-        break;
-
-    case 3:
-
-
-
-        //Menu da rainha!
-        //Segue a mesma lógica dos outros dois.
-        do{
-        printf("Você escolheu a rainha! \n");
-        printf("A rainha se move para a esquerda e até 8 casas! \n");
-        printf("Escolha a quantidade de vezes que a rainha irá se mover! \n");
-        scanf("%i", &rainha);
-
-        
-    }while (rainha <= 0 || rainha > 8);
+    scanf("%i", &rainhaQuant);
     
+    } while(rainhaQuant <= 0 || rainhaQuant > 8);
 
-    while (rainhaMov <= rainha)
-    {
+    MovaRainha(rainhaQuant);
 
-        //Mesma lógica dos outros!
-        printf("A rainha se moveu %i vezes! \n", rainhaMov);
-        printf("Esquerda! \n \n");
-        rainhaMov++;
+    break;
 
-    }
+case 4:
+
+//Mesma lógica.
+
+do{
     
-    
-        break;
-    case 4: 
+    printf("O cavalo pode ser mover em forma de L, duas casas para cima e uma direita, ele vai se mover até 5 vezes! \n");
+    printf("Escolha quantas vezes o cavalo se moverá! \n");
+    scanf("%i", &cavaloQuant);
 
-        printf("Saindo...");
-        break;
+}while (cavaloQuant <= 0 || cavaloQuant > 5);
 
-    }
+    MovaCavalo(cavaloQuant);
 
-
-
-
-
-
-
-
-
-    // Implementação de Movimentação do Bispo
-    // Sugestão: Utilize uma estrutura de repetição para simular a movimentação do Bispo em diagonal.
-
-    // Implementação de Movimentação da Torre
-    // Sugestão: Utilize uma estrutura de repetição para simular a movimentação da Torre para a direita.
-
-    // Implementação de Movimentação da Rainha
-    // Sugestão: Utilize uma estrutura de repetição para simular a movimentação da Rainha para a esquerda.
-
-    // Nível Aventureiro - Movimentação do Cavalo
-    // Sugestão: Utilize loops aninhados para simular a movimentação do Cavalo em L.
-    // Um loop pode representar a movimentação horizontal e outro vertical.
-
-    // Nível Mestre - Funções Recursivas e Loops Aninhados
-    // Sugestão: Substitua as movimentações das peças por funções recursivas.
-    // Exemplo: Crie uma função recursiva para o movimento do Bispo.
-
-    // Sugestão: Implemente a movimentação do Cavalo utilizando loops com variáveis múltiplas e condições avançadas.
-    // Inclua o uso de continue e break dentro dos loops.
+    break;
 
     return 0;
 }
